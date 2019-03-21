@@ -1,7 +1,7 @@
 //---------------------------------------------------------------//
 // NOME: RENAN MOREIRA GOMES                                     //
 // PROFESSOR: VINICIUS                                           //
-// TURMA: CCOMP                                                  //
+// TURMA: CCOMP T1                                               //
 //---------------------------------------------------------------//
 
 #include <stdio.h>
@@ -128,13 +128,13 @@ void inverte( int n, int* vet ){
 	int i = 0;
 
 	for( i = 0 ; i < n ; i++ ){
-		aux[i] = vet[i];
+		*(aux + i) = *(vet + i);
 	}
 	for( i = 0 ; i < n ; i++ ){
-		vet[n - i - 1] = aux[i];
+		*(vet + (n - i - 1)) = *(aux + i);
 	}
 	for( i = 0 ; i < n ; i++ ){
-		printf("[%d]", vet[i]);
+		printf("[%d]", *(vet +i));
 	}
 
 	free(aux);
@@ -158,10 +158,10 @@ int substring(char* fst, char* snd){
 	int recorrence = 0;
 
 	for( i = 0 ; i < fst_len ; i++ ){
-		if( fst[i] == snd[0] ){
+		if( *(fst + i) == *(snd) ){
 			for( j = 0 ; j < snd_len ; j++ ){
 				if( i + j >= fst_len ) break;
-				if( fst[i + j] == snd[j] ) recorrence++;
+				if( *(fst + i + j) == *(snd + j) ) recorrence++;
 			}
 			if( recorrence == snd_len ) return 1;
 			else{
