@@ -57,8 +57,11 @@ Matriz* transposta (Matriz* mat){
 	int i = 0;
 	int j = 0;
 
-	for( i = 0 ; i < recuperaNLinhas(mat) ; i++ )
-		for( j = 0 ; j < recuperaNColunas(mat) ; j++ )
+	int k = recuperaNLinhas(mat);
+	int l = recuperaNColunas(mat);
+
+	for( i = 0 ; i < k ; i++ )
+		for( j = 0 ; j < l ; j++ )
 			transposta->mat[j][i] = mat->mat[i][j];
 
 	return transposta;
@@ -71,16 +74,20 @@ Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
 	int j = 0;
 	int k = 0;
 
+	int l = recuperaNLinhas(mat1);
+	int m = recuperaNColunas(mat2);
+	int n = recuperaNColunas(mat1);
+
 	Matriz* multiplicada = inicializaMatriz( recuperaNLinhas(mat1), recuperaNColunas(mat2) );
 
 	if( multiplicada == NULL ) return NULL;
 
-	for( i = 0 ; i < recuperaNLinhas(mat1) ; i++ ){
+	for( i = 0 ; i < l ; i++ ){
 		
 		multiplicada->mat[i][j] = 0;
 		
-		for( j = 0 ; j < recuperaNColunas(mat2) ; j++ )
-			for( k = 0 ; k < recuperaNColunas(mat1) ; k++ )
+		for( j = 0 ; j < m ; j++ )
+			for( k = 0 ; k < n ; k++ )
 				multiplicada->mat[i][j] +=  mat1->mat[i][k] * mat2->mat[k][j];	
 	
 	}
@@ -96,9 +103,12 @@ void imprimeMatriz(Matriz* mat){
 	int i = 0;
 	int j = 0;
 
+	int k = recuperaNLinhas(mat);
+	int l = recuperaNColunas(mat);
+
 	printf("\n");
-	for( i = 0 ; i < recuperaNLinhas(mat) ; i++ ){
-		for( j = 0 ; j < recuperaNLinhas(mat) ; j++ )
+	for( i = 0 ; i < k ; i++ ){
+		for( j = 0 ; j < l ; j++ )
 			printf("[%d]", mat->mat[i][j]);
 		printf("\n");
 	}
@@ -111,8 +121,9 @@ void destroiMatriz(Matriz* mat){
 	if( mat == NULL ) return;
 	
 	int i = 0;
+	int k = recuperaNLinhas(mat);
 
-	for( i = 0 ; i < recuperaNLinhas(mat) ; i++ )
+	for( i = 0 ; i < k ; i++ )
 		free(mat->mat[i]);
 
 	free(mat->mat);
@@ -128,6 +139,7 @@ void trocaElemento(Matriz* mat, int a, int b, int c, int d){
 }
 
 void giraMatriz(Matriz* mat){
+
 	int i = 0;
 	int j = 0;
 	int k = recuperaNLinhas(mat);
@@ -135,8 +147,10 @@ void giraMatriz(Matriz* mat){
 
 	for( i = 0 ; i < k ; i++ )
 		for( j = 0 ; j < l ; j++ ){
-			trocaElemento(mat, i, j, i, l - i);
-		}	
+			 
+		}
+
+	
 	return;
 }
 
