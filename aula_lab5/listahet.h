@@ -1,9 +1,19 @@
+#ifndef H_LISTAHET
+#define H_LISTAHET
+
+#define _U -1
+#define _M 0
+#define _I 1 
+
 /*Estrutura Cliente(tipo opaco)
   Estrutura interna do tipo deve ser definida na implementação do TAD. Devem ser definidos campos:
   - nome (string)
   - id (int)
   */
-typedef struct cliente Cliente;
+typedef struct cliente {
+	char* nome;
+	int id;
+} Cliente;
 
 /*Estrutura Movel(tipo opaco)
   Estrutura interna do tipo deve ser definida na implementação do TAD. Devem ser definidos campos:
@@ -11,7 +21,11 @@ typedef struct cliente Cliente;
   - ano (int)
   - valor (float)
   */
-typedef struct movel Movel;
+typedef struct movel {
+	int placa;
+	int ano;
+	float valor;
+} Movel;
 
 
 /*Estrutura Imovel(tipo opaco)
@@ -20,7 +34,11 @@ typedef struct movel Movel;
   - ano (int)
   - valor (float)
   */
-typedef struct imovel Imovel;
+typedef struct imovel {
+	int id;
+	int ano;
+	float valor;
+} Imovel;
 
 
 /*Tipo que define a lista heterogenea(tipo opaco)
@@ -31,7 +49,12 @@ typedef struct imovel Imovel;
    - Prox (struct listahet*)
    - identificador do item (int)
 */
-typedef struct listahet ListaHet;
+typedef struct listahet {
+	Cliente *dono;
+	void *item;
+	struct listahet prox;
+	int id_item;
+} ListaHet;
 
 /*Cria lista vazia
 * inputs: nenhum
@@ -106,3 +129,5 @@ ListaHet* retira_cliente (ListaHet* lista, int id_cliente);
 * pos-condicao: lista inalterada
 */
 float calcula_valor_assegurado (ListaHet* lista, Cliente* dono, float taxa_movel, float taxa_imovel);
+
+#endif
